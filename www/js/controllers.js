@@ -31,6 +31,7 @@ angular.module('myApp.controllers', [])
                  })
                  .error(function(data, status, headers, config) {
                     $scope.error.message = data.error;
+                    window.localStorage.clear();
                     return;
                  });
         }
