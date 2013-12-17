@@ -23,7 +23,10 @@ angular.module('myApp.controllers', [])
             }
 
             $http.post("http://offerfans.ngrok.com/api/v1/auth/login", $scope.user)
-                 .success(function(data) {
+                 .success(function(data, status, headers, config) {
+                    console.log(data);
+                    console.log(status);
+                    console.log(headers);
                     window.localStorage.setItem("access_token", data.token);
                     window.localStorage.setItem("username", $scope.user.username);
                     window.location = "#/scan";
