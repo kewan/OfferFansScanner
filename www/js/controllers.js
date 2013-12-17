@@ -26,7 +26,7 @@ angular.module('myApp.controllers', [])
                  .success(function(data) {
                     window.localStorage.setItem("access_token", data.token);
                     window.localStorage.setItem("username", $scope.user.username);
-                    window.location = "/#/scan";
+                    window.location = "#/scan";
                     return true;
                  })
                  .error(function(data, status, headers, config) {
@@ -38,7 +38,7 @@ angular.module('myApp.controllers', [])
     .controller('ScanCtrl', ['$scope', 'Employee', function ($scope, Employee) {
 
         if (!window.localStorage.getItem("access_token")) {
-            window.location = "/#/login";
+            window.location = "#/login";
             return false;
         }
 
