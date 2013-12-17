@@ -11,6 +11,7 @@
 
 
 <div class='details' style="text-align: center; margin-top: 60px;">
+    <form ng-submit="doLogin()">
     <p id="error" ng-show="error.message">{{error.message}}</p>
     <div>
         <input type="text" class="topcoat-text-input" ng-model="user.username" placeholder="username" value="">
@@ -20,8 +21,7 @@
         <input type="password" class="topcoat-text-input" ng-model="user.password" placeholder="password" value="">
     </div>
 
-    <button class="topcoat-button" ng-click="doLogin()">
-      Login
-    </button>
+    <input type="submit" class="topcoat-button" value="Login" />
+    </form>
 </div>
          
