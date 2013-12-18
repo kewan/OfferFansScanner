@@ -1,5 +1,8 @@
 'use strict';
 
+
+
+
 angular.module('myApp.scannerService', ['fsCordova'])
     .factory('Scanner', ['CordovaService',
         function (CordovaService) {
@@ -36,7 +39,7 @@ angular.module('myApp.scannerService', ['fsCordova'])
                       
 
                   }, function (error) { 
-                      response.error = "Scanning failed: ", error);
+                      response.error = "Scanning failed: " + error;
                   } );
 
                 });
