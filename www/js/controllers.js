@@ -49,7 +49,10 @@ angular.module('myApp.controllers', [])
         $scope.user  = { username: window.localStorage.getItem("username") };
 
         $scope.scan = function() {
-            Scanner.scan();
+           response = Scanner.scan();
+
+           console.log("Scanner click function");
+           console.log(response);
         }
     }])
     .controller('EmployeeListCtrl', ['$scope', 'Employee', function ($scope, Employee) {
