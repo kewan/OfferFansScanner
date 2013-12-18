@@ -1,15 +1,11 @@
 'use strict';
 
-
-
-
 angular.module('myApp.scannerService', ['fsCordova'])
     .factory('Scanner', ['CordovaService',
         function (CordovaService) {
             return {
               scan: function() {
-                var response = {};
-
+         
                 CordovaService.ready.then(function() {
 
                   var scanner = cordova.require("cordova/plugin/BarcodeScanner");
@@ -21,30 +17,25 @@ angular.module('myApp.scannerService', ['fsCordova'])
                           "format: " + result.format + "\n" +
                           "cancelled: " + result.cancelled + "\n");
 
-                      if result.cancelled {
-                          return;
-                      }
+                      // if result.cancelled {
+                      //     return;
+                      // }
 
-                      if (!result.text) {
-                          response.error = "Can not read barcode";
-                          return;
-                      }
+                      // if (!result.text) {
+                      //     response.error = "Can not read barcode";
+                      //     return;
+                      // }
 
-                      if (args.format != "QR_CODE") {
-                          response.error = "Unknown barcode format";
-                          return;
-                      }
-
-                      response.text = result.text;
-                      
+                      // if (args.format != "QR_CODE") {
+                      //     response.error = "Unknown barcode format";
+                      //     return;
+                      // }                      
 
                   }, function (error) { 
-                      response.error = "Scanning failed: " + error;
+                      console.log("Scanning failed: ", error);
                   } );
 
                 });
-
-                return response;
               }
             }
 
