@@ -60,10 +60,9 @@
     <gap:plugin name="org.apache.cordova.vibration" /> -->
 
     <!-- Third party plugins -->
-    <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
-    <!-- 
-        <gap:plugin name="com.phonegap.plugins.barcodescanner" />
-    -->
+    <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->    
+    <gap:plugin name="com.phonegap.plugins.barcodescanner" />
+   
 
     <!-- Define app icon for each platform. -->
     <icon src="icon.png" />
@@ -102,6 +101,8 @@
         Otherwise, you can specify specific domains:
     -->
     <access origin="*"/> <!-- allow local pages -->
+    <access origin="offerfans.ngrok.com" />
+
     <!--
         <access origin="http://phonegap.com" />                    - allow any secure requests to http://phonegap.com/
         <access origin="http://phonegap.com" subdomains="true" />  - same as above, but including subdomains, such as http://build.phonegap.com/
