@@ -6,7 +6,8 @@ angular.module('myApp', [
     'ngAnimate',
     'myApp.controllers',
     'myApp.memoryServices',
-    'fsCordova'
+    'fsCordova',
+    'myApp.scannerService'
 ]).
 config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginCtrl'});
