@@ -39,7 +39,7 @@ angular.module('myApp.controllers', [])
                  });
         }
     }])
-    .controller('ScanCtrl', ['$scope', 'Employee', function ($scope, Employee) {
+    .controller('ScanCtrl', ['$scope', 'CordovaService', function ($scope, CordovaService) {
 
         if (!window.localStorage.getItem("access_token")) {
             window.location = "#/login";
@@ -47,6 +47,10 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.user  = { username: window.localStorage.getItem("username") };
+
+        CordovaService.ready.then(function() {
+          console.log("cordova is now ready sir");
+        });
 
         $scope.scan = function() {
             var scanner = cordova.require("cordova/plugin/BarcodeScanner");
