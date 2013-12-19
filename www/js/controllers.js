@@ -46,7 +46,7 @@ angular.module('myApp.controllers', [])
         $scope.user  = { username: window.localStorage.getItem("username") };
 
         $scope.scan = function() {
-           response = Scanner.scan(function (result) {
+           Scanner.scan(function (result) {
                console.log("Scanner result: \n" +
                     "text: " + result.text + "\n" +
                     "format: " + result.format + "\n" +
