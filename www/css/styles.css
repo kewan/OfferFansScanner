@@ -20,6 +20,11 @@
     background-size: cover;
 }
 
+.logout-button {
+    margin-top: 10px;
+    float: right;
+}
+
 .count {
     color: #5DC1FF;
     position: absolute;

@@ -1,20 +1,17 @@
 <div class="topcoat-navigation-bar">
-    <div class="topcoat-navigation-bar__item left quarter">
-        <a class="topcoat-icon-button--quiet back-button" href="" ng-click="back()">
-            <span class="topcoat-icon topcoat-icon--back"></span>
-        </a>
-        <a class="topcoat-icon-button--quiet" ng-click="logout()">
+    <div class="topcoat-navigation-bar__item left three-quarters">
+        <h1 class="topcoat-navigation-bar__title">Logged in as {{user.username}}</h1>
+    </div>
+    <div class="topcoat-navigation-bar__item right quarter">
+        <a class="topcoat-icon-button logout-button" ng-click="logout()">
             Logout
         </a>
-    </div>
-    <div class="topcoat-navigation-bar__item center half">
-        <h1 class="topcoat-navigation-bar__title">Logged in as {{user.username}}</h1>
     </div>
 </div>
 
 
 <div class='details' style="text-align: center; margin-top: 60px;">
-    <p id="error" ng-show="error">{{error}}</p>
+    <p id="error" ng-show="error.message">{{error.message}}</p>
     <button class="topcoat-button--large--cta" ng-click="scan()">Scan Offer Code</button>
     <h2 ng-show="code">{{code}}</h2>
 </div>

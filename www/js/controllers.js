@@ -51,6 +51,10 @@ angular.module('myApp.controllers', [])
         $scope.user  = { username: window.localStorage.getItem("username") };
 
         $scope.scan = function() {
+
+           $scope.error = {};
+           $scope.code  = '';
+
            Scanner.scan(function (result) {
                console.log("Scanner result: \n" +
                     "text: " + result.text + "\n" +
@@ -62,17 +66,17 @@ angular.module('myApp.controllers', [])
                     }
 
                     if (!result.text) {
-                        $scope.error = "Can not read barcode";
+                        $scope.error.message = "Can not read barcode";
                     }
 
                     if (result.format != "QR_CODE") {
-                        $scope.error = "Unknown barcode format";
+                        $scope.error.message = "Unknown barcode format";
                     }
 
                     $scope.code = result.text;
 
             }, function (error) { 
-                $scope.error = "Scanning failed: " + error;
+                $scope.error.message = "Scanning failed: " + error;
             });
         }
     }])
