@@ -51,6 +51,7 @@ angular.module('myApp.controllers', [])
         $scope.scan = function() {
            response = Scanner.scan();
 
+           alert("Should have a response");
            console.log("Scanner click function");
            console.log(response);
         }
