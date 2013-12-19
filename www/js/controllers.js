@@ -92,17 +92,19 @@ angular.module('myApp.controllers', [])
 
             console.log("PUT request", "http://offerfans.ngrok.com/api/v1/redeem/"+code);
             console.log(options);
+            console.log($scope);
+            console.log($rootScope);
 
-            $scope.$apply(function() {
-                // put access_token in header
-                $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+result.text, {}, options)
-                     .success(function(data, status, headers, config) {
-                        console.log(data);
-                     })
-                     .error(function(data, status, headers, config) {
-                        console.log(data);
-                     });
-            });
+            // $scope.$apply(function() {
+            //     // put access_token in header
+            //     $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+result.text, {}, options)
+            //          .success(function(data, status, headers, config) {
+            //             console.log(data);
+            //          })
+            //          .error(function(data, status, headers, config) {
+            //             console.log(data);
+            //          });
+            // });
 
         }
     }])
