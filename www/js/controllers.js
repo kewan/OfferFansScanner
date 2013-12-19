@@ -85,7 +85,7 @@ angular.module('myApp.controllers', [])
             // $scope.code = code;
             // $scope.$apply();
 
-            options = {
+            var options = {
                 headers: {
                     'Access-Token' : window.localStorage.getItem("access_token")
                 }
