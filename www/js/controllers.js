@@ -60,26 +60,28 @@ angular.module('myApp.controllers', [])
                 "format: " + result.format + "\n" +
                 "cancelled: " + result.cancelled + "\n");
 
-           console.log("Scope user", $scope.user.username);
+            if (result.cancelled) {
+                $scope.error.message = "Cancelled";
+            } else if (result.format != "QR_CODE") {
+                $scope.error.message = "Unknown barcode format";
+            } else
+                if (result.text) {
+                    redeemCode(result.text);
+                } else {
+                    $scope.error.message = "Can not read barcode";
+                }
+            }
 
-            // if (result.cancelled) {
-            //     return;
-            // }
-
-            // if (!result.text) {
-            //     $scope.error.message = "Can not read barcode";
-            // }
-
-            // if (result.format != "QR_CODE") {
-            //     $scope.error.message = "Unknown barcode format";
-            // }
-
-            $scope.code = result.text;
             $scope.$apply();
         }
 
         var onFail = function (error) { 
             $scope.error.message = "Scanning failed: " + error;
+            $scope.$apply();
+        }
+
+        var redeemCode = function(code) {
+            $scope.code = code;
             $scope.$apply();
         }
     }])
