@@ -17,8 +17,8 @@ angular.module('myApp.controllers', [])
             return false;
         }
     }])
-    .controller('LoginCtrl', ['$scope', 'Employee', '$http', function ($scope, Employee, $http) {
-        // $scope.employees = Employee.query();
+    .controller('LoginCtrl', ['$scope', '$http', function ($scope, $http) {
+
         $scope.doLogin = function() {
             $scope.error = {};
 
@@ -64,6 +64,7 @@ angular.module('myApp.controllers', [])
 
         $scope.scan = function() {
            $scope.error = {};
+           $scope.claim = {};
            Scanner.scan(onSuccess, onFail);
         }
 
@@ -105,7 +106,6 @@ angular.module('myApp.controllers', [])
             // put access_token in header
             $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+code, {}, options)
                  .success(function(data, status, headers, config) {
-                    console.log(data);
                     $scope.claim = data.claim;
                     $scope.$apply();
                  })
@@ -124,13 +124,4 @@ angular.module('myApp.controllers', [])
                  });
 
         }
-    }])
-    .controller('EmployeeListCtrl', ['$scope', 'Employee', function ($scope, Employee) {
-        $scope.employees = Employee.query();
-    }])
-    .controller('EmployeeDetailCtrl', ['$scope', '$routeParams', 'Employee', function ($scope, $routeParams, Employee) {
-        $scope.employee = Employee.get({employeeId: $routeParams.employeeId});
-    }])
-    .controller('ReportListCtrl', ['$scope', '$routeParams', 'Report', function ($scope, $routeParams, Report) {
-        $scope.employees = Report.query({employeeId: $routeParams.employeeId});
     }]);
