@@ -62,7 +62,6 @@ angular.module('myApp.controllers', [])
                     "cancelled: " + result.cancelled + "\n");
 
                console.log("Scope user" + $scope.user);
-               console.log("scope", $scope);
 
                     // if (result.cancelled) {
                     //     return;
@@ -81,6 +80,9 @@ angular.module('myApp.controllers', [])
             }, function (error) { 
                 $scope.error.message = "Scanning failed: " + error;
             });
+
+          console.log("code", $scope.code);
+          console.log("scope", $scope);
         }
     }])
     .controller('EmployeeListCtrl', ['$scope', 'Employee', function ($scope, Employee) {
