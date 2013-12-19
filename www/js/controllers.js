@@ -64,7 +64,7 @@ angular.module('myApp.controllers', [])
                 $scope.error.message = "Cancelled";
             } else if (result.format != "QR_CODE") {
                 $scope.error.message = "Unknown barcode format";
-            } else
+            } else {
                 if (result.text) {
                     redeemCode(result.text);
                 } else {
