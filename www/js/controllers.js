@@ -24,9 +24,6 @@ angular.module('myApp.controllers', [])
 
             $http.post("http://offerfans.ngrok.com/api/v1/auth/login", $scope.user)
                  .success(function(data, status, headers, config) {
-                    console.log(data);
-                    console.log(status);
-                    console.log(headers);
                     window.localStorage.setItem("access_token", data.token);
                     window.localStorage.setItem("username", $scope.user.username);
                     window.location = "#/scan";
@@ -49,11 +46,15 @@ angular.module('myApp.controllers', [])
         $scope.user  = { username: window.localStorage.getItem("username") };
 
         $scope.scan = function() {
-           response = Scanner.scan();
+           response = Scanner.scan(function (result) {
+               console.log("Scanner result: \n" +
+                    "text: " + result.text + "\n" +
+                    "format: " + result.format + "\n" +
+                    "cancelled: " + result.cancelled + "\n");
 
-           alert("Should have a response");
-           console.log("Scanner click function");
-           console.log(response);
+            }, function (error) { 
+              console.log("Scanning failed: " + error );
+            });
         }
     }])
     .controller('EmployeeListCtrl', ['$scope', 'Employee', function ($scope, Employee) {
