@@ -64,17 +64,17 @@ angular.module('myApp.controllers', [])
                console.log("Scope user" + $scope.user);
                console.log("scope", $scope);
 
-                    if (result.cancelled) {
-                        return;
-                    }
+                    // if (result.cancelled) {
+                    //     return;
+                    // }
 
-                    if (!result.text) {
-                        $scope.error.message = "Can not read barcode";
-                    }
+                    // if (!result.text) {
+                    //     $scope.error.message = "Can not read barcode";
+                    // }
 
-                    if (result.format != "QR_CODE") {
-                        $scope.error.message = "Unknown barcode format";
-                    }
+                    // if (result.format != "QR_CODE") {
+                    //     $scope.error.message = "Unknown barcode format";
+                    // }
 
                     $scope.code = result.text;
 
