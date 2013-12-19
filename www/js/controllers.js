@@ -93,7 +93,7 @@ angular.module('myApp.controllers', [])
             console.log("PUT request", "http://offerfans.ngrok.com/api/v1/redeem/"+code);
 
             // put access_token in header
-            $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+result.text, {}, options)
+            $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+code, {}, options)
                  .success(function(data, status, headers, config) {
                     console.log(data);
                  })
