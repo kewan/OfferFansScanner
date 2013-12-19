@@ -106,7 +106,7 @@ angular.module('myApp.controllers', [])
             $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+code, {}, options)
                  .success(function(data, status, headers, config) {
                     console.log(data);
-                    $scope.claim = data;
+                    $scope.claim = data.claim;
                     $scope.$apply();
                  })
                  .error(function(data, status, headers, config) {
