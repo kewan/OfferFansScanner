@@ -83,7 +83,7 @@ angular.module('myApp.controllers', [])
 
         var redeemCode = function(code) {
             // $scope.code = code;
-            // $scope.$apply();
+            // 
             var options = {
                 headers: {
                     'Access-Token' : window.localStorage.getItem("access_token")
@@ -96,9 +96,11 @@ angular.module('myApp.controllers', [])
             $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+code, {}, options)
                  .success(function(data, status, headers, config) {
                     console.log(data);
+
                  })
                  .error(function(data, status, headers, config) {
-                    console.log(data);
+                    $scope.error.message = data.error;
+                    $scope.$apply();
                  });
 
         }
