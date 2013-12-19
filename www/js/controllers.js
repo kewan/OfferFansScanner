@@ -61,7 +61,8 @@ angular.module('myApp.controllers', [])
                     "format: " + result.format + "\n" +
                     "cancelled: " + result.cancelled + "\n");
 
-               console.log($scope.user);
+               console.log("Scope user" + $scope.user);
+               console.log("scope", $scope);
 
                     if (result.cancelled) {
                         return;
