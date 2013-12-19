@@ -6,38 +6,37 @@ angular.module('myApp.scannerService', ['fsCordova'])
           return {
             scan: function() {
 
-              return CordovaService.ready.then(function() {
+              return 'monkey';
+              // CordovaService.ready.then(function() {
 
-                return "monkey";
+              //   var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-                // var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+              //   return scanner.scan( function (result) { 
 
-                // return scanner.scan( function (result) { 
+              //      console.log("Scanner result: \n" +
+              //           "text: " + result.text + "\n" +
+              //           "format: " + result.format + "\n" +
+              //           "cancelled: " + result.cancelled + "\n");
 
-                //    console.log("Scanner result: \n" +
-                //         "text: " + result.text + "\n" +
-                //         "format: " + result.format + "\n" +
-                //         "cancelled: " + result.cancelled + "\n");
+              //       if (result.cancelled) {
+              //           return {};
+              //       }
 
-                //     if (result.cancelled) {
-                //         return {};
-                //     }
+              //       if (!result.text) {
+              //           return { error: "Can not read barcode"};
+              //       }
 
-                //     if (!result.text) {
-                //         return { error: "Can not read barcode"};
-                //     }
+              //       if (result.format != "QR_CODE") {
+              //           return { error: "Unknown barcode format" };
+              //       }
 
-                //     if (result.format != "QR_CODE") {
-                //         return { error: "Unknown barcode format" };
-                //     }
+              //       return { code: result.text };
 
-                //     return { code: result.text };
+              //   }, function (error) { 
+              //     return { error: "Scanning failed: " + error };
+              //   } );
 
-                // }, function (error) { 
-                //   return { error: "Scanning failed: " + error };
-                // } );
-
-              });
+              // });
             }
           }
         }]);
