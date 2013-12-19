@@ -54,7 +54,7 @@ angular.module('myApp.controllers', [])
            Scanner.scan(onSuccess, onFail);
         }
 
-        $scope.onSuccess = function (result) {
+        var onSuccess = function (result) {
            console.log("Scanner result: \n" +
                 "text: " + result.text + "\n" +
                 "format: " + result.format + "\n" +
@@ -78,7 +78,7 @@ angular.module('myApp.controllers', [])
             $scope.$apply();
         }
 
-        $scope.onFail = function (error) { 
+        var onFail = function (error) { 
             $scope.error.message = "Scanning failed: " + error;
             $scope.$apply();
         }
