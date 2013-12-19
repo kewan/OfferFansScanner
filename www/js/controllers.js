@@ -67,25 +67,7 @@ angular.module('myApp.controllers', [])
                 $scope.error.message = "Unknown barcode format";
             } else {
                 if (result.text) {
-
-                    var options = {
-                        headers: {
-                            'Access-Token' : window.localStorage.getItem("access_token")
-                        }
-                    }
-
-                    console.log("PUT request", "http://offerfans.ngrok.com/api/v1/redeem/"+result.text);
-                    console.log(options);
-
-                    // put access_token in header
-                    $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+result.text, {}, options)
-                         .success(function(data, status, headers, config) {
-                            console.log(data);
-                         })
-                         .error(function(data, status, headers, config) {
-                            console.log(data);
-                         });
-
+                    redeemCode(result.text);
                 } else {
                     $scope.error.message = "Can not read barcode";
                 }
@@ -102,6 +84,25 @@ angular.module('myApp.controllers', [])
         var redeemCode = function(code) {
             // $scope.code = code;
             // $scope.$apply();
+            var options = {
+                headers: {
+                    'Access-Token' : window.localStorage.getItem("access_token")
+                }
+            }
+
+            console.log("PUT request", "http://offerfans.ngrok.com/api/v1/redeem/"+code);
+            console.log(options);
+
+            $scope.$apply(function() {
+                // put access_token in header
+                $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+result.text, {}, options)
+                     .success(function(data, status, headers, config) {
+                        console.log(data);
+                     })
+                     .error(function(data, status, headers, config) {
+                        console.log(data);
+                     });
+            });
 
         }
     }])
