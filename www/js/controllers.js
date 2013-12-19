@@ -84,6 +84,22 @@ angular.module('myApp.controllers', [])
         var redeemCode = function(code) {
             $scope.code = code;
             $scope.$apply();
+
+            options = {
+                headers: {
+                    'Access-Token' : window.localStorage.getItem("access_token")
+                }
+            }
+
+            // put access_token in header
+            $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+code, {}, options)
+                 .success(function(data, status, headers, config) {
+                    console.log(data);
+                 })
+                 .error(function(data, status, headers, config) {
+                    console.log(data);
+                 });
+
         }
     }])
     .controller('EmployeeListCtrl', ['$scope', 'Employee', function ($scope, Employee) {
