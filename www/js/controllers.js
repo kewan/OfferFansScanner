@@ -51,6 +51,7 @@ angular.module('myApp.controllers', [])
         $scope.user  = { username: window.localStorage.getItem("username") };
 
         $scope.scan = function() {
+           $scope.error = {};
            Scanner.scan(onSuccess, onFail);
         }
 
