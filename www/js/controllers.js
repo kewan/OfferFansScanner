@@ -90,8 +90,6 @@ angular.module('myApp.controllers', [])
                 }
             }
 
-            console.log("PUT request", "http://offerfans.ngrok.com/api/v1/redeem/"+code);
-
             // put access_token in header
             $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+code, {}, options)
                  .success(function(data, status, headers, config) {
@@ -101,6 +99,14 @@ angular.module('myApp.controllers', [])
                  .error(function(data, status, headers, config) {
                     $scope.error.message = data.error;
                     $scope.$apply();
+
+                    if (status == 401) {
+                        //unauthorised invalid token
+                        window.localStorage.clear();
+                        window.location = "#/login";
+                        return false;
+                    }
+
                  });
 
         }
