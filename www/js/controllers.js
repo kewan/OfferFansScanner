@@ -51,38 +51,36 @@ angular.module('myApp.controllers', [])
         $scope.user  = { username: window.localStorage.getItem("username") };
 
         $scope.scan = function() {
+           Scanner.scan(onSuccess, onFail);
+        }
 
-           $scope.error = {};
-           $scope.code  = '';
+        $scope.onSuccess = function (result) {
+           console.log("Scanner result: \n" +
+                "text: " + result.text + "\n" +
+                "format: " + result.format + "\n" +
+                "cancelled: " + result.cancelled + "\n");
 
-           Scanner.scan(function (result) {
-               console.log("Scanner result: \n" +
-                    "text: " + result.text + "\n" +
-                    "format: " + result.format + "\n" +
-                    "cancelled: " + result.cancelled + "\n");
+           console.log("Scope user", $scope.user.username);
 
-               console.log("Scope user" + $scope.user);
+            // if (result.cancelled) {
+            //     return;
+            // }
 
-                    // if (result.cancelled) {
-                    //     return;
-                    // }
+            // if (!result.text) {
+            //     $scope.error.message = "Can not read barcode";
+            // }
 
-                    // if (!result.text) {
-                    //     $scope.error.message = "Can not read barcode";
-                    // }
+            // if (result.format != "QR_CODE") {
+            //     $scope.error.message = "Unknown barcode format";
+            // }
 
-                    // if (result.format != "QR_CODE") {
-                    //     $scope.error.message = "Unknown barcode format";
-                    // }
+            $scope.code = result.text;
+            $scope.$apply();
+        }
 
-                    $scope.code = result.text;
-
-            }, function (error) { 
-                $scope.error.message = "Scanning failed: " + error;
-            });
-
-          console.log("code", $scope.code);
-          console.log("scope", $scope);
+        $scope.onFail = function (error) { 
+            $scope.error.message = "Scanning failed: " + error;
+            $scope.$apply();
         }
     }])
     .controller('EmployeeListCtrl', ['$scope', 'Employee', function ($scope, Employee) {
