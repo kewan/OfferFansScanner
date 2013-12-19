@@ -10,9 +10,18 @@
 </div>
 
 
-<div class='details' style="text-align: center; margin-top: 60px;">
+<div class='details' style="text-align: center; margin-top: 30px;">
     <button class="topcoat-button--large--cta" ng-click="scan()">Scan Offer Code</button>
     <p id="error" ng-show="error.message">{{error.message}}</p>
-    <h2 ng-show="code!=''">{{code}}</h2>
+    
+
+    <div id="claim" ng-show="claim">
+        <h2>{{claim.code}} redeemed!</h2>
+        
+        <img src="{{claim.customer.picture}}" /> 
+        <p><strong>{{claim.customer.name}}</strong> just scored</p>
+        <img src="{{claim.offer.image}}" />
+        <p>{{claim.offer.title}}</p>
+    </div>
 </div>
          

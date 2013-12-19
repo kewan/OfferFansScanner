@@ -50,6 +50,18 @@ angular.module('myApp.controllers', [])
 
         $scope.user  = { username: window.localStorage.getItem("username") };
 
+        // $scope.claim = {
+        //     code: '12345667778999',
+        //     customer: {
+        //         name: 'Kewan',
+        //         picture: 'http://www.placehold.it/50x50'
+        //     },
+        //     offer: {
+        //         title: '2 for 1 on main meals',
+        //         image: 'http://www.placehold.it/90x50'
+        //     }
+        // };
+
         $scope.scan = function() {
            $scope.error = {};
            Scanner.scan(onSuccess, onFail);
@@ -94,7 +106,8 @@ angular.module('myApp.controllers', [])
             $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+code, {}, options)
                  .success(function(data, status, headers, config) {
                     console.log(data);
-
+                    $scope.claim = data;
+                    $scope.$apply();
                  })
                  .error(function(data, status, headers, config) {
                     $scope.error.message = data.error;
@@ -102,6 +115,7 @@ angular.module('myApp.controllers', [])
 
                     if (status == 401) {
                         //unauthorised invalid token
+                        alert(data.error);
                         window.localStorage.clear();
                         window.location = "#/login";
                         return false;
