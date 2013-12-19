@@ -11,6 +11,11 @@ angular.module('myApp.controllers', [])
           $scope.slide = 'slide-left';
           $location.url(path);
         }
+        $rootScope.logout = function() {
+            window.localStorage.clear();
+            window.location = "#/login";
+            return false;
+        }
     }])
     .controller('LoginCtrl', ['$scope', 'Employee', '$http', function ($scope, Employee, $http) {
         // $scope.employees = Employee.query();
