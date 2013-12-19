@@ -41,7 +41,7 @@ angular.module('myApp.controllers', [])
                  });
         }
     }])
-    .controller('ScanCtrl', ['$scope', 'Scanner', function ($scope, Scanner) {
+    .controller('ScanCtrl', ['$scope', 'Scanner', '$http', function ($scope, Scanner, $http) {
 
         if (!window.localStorage.getItem("access_token")) {
             window.location = "#/login";
@@ -95,16 +95,14 @@ angular.module('myApp.controllers', [])
             console.log($scope);
             console.log($rootScope);
 
-            // $scope.$apply(function() {
-            //     // put access_token in header
-            //     $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+result.text, {}, options)
-            //          .success(function(data, status, headers, config) {
-            //             console.log(data);
-            //          })
-            //          .error(function(data, status, headers, config) {
-            //             console.log(data);
-            //          });
-            // });
+            // put access_token in header
+            $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+result.text, {}, options)
+                 .success(function(data, status, headers, config) {
+                    console.log(data);
+                 })
+                 .error(function(data, status, headers, config) {
+                    console.log(data);
+                 });
 
         }
     }])
