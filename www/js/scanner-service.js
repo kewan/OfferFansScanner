@@ -10,7 +10,7 @@ angular.module('myApp.scannerService', ['fsCordova'])
 
                 var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
-                scanner.scan( function (result) { 
+                return scanner.scan( function (result) { 
 
                    console.log("Scanner result: \n" +
                         "text: " + result.text + "\n" +
