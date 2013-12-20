@@ -5,15 +5,15 @@ angular.module('myApp.notifyService', ['fsCordova'])
         function (CordovaService) {
           return {
             beep: function() {
-              console.log("Beep beeo");
               CordovaService.ready.then(function() {
-                navigator.notification.beep(1);
+                console.log("Beep beeo");
+                navigator.notification.beep(2);
               });
             },
             vibrate: function() {
-              console.log("brrrr brbbrbr brbrbr");
               CordovaService.ready.then(function() {
-                navigator.notification.vibrate(1000);
+                console.log("brrrr brbbrbr brbrbr");
+                navigator.notification.vibrate(300);
               });
             }
           }
