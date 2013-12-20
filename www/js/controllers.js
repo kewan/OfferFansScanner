@@ -95,6 +95,10 @@ angular.module('myApp.controllers', [])
                 }
             }
 
+            if ($scope.error.message) {
+                $scope.loading = false;
+            }
+
             $scope.$apply();
         }
 
@@ -116,10 +120,12 @@ angular.module('myApp.controllers', [])
             $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+code, {}, options)
                  .success(function(data, status, headers, config) {
                     $scope.claim = data.claim;
+                    $scope.loading = false;
                     $scope.$apply();
                  })
                  .error(function(data, status, headers, config) {
                     $scope.error.message = data.error;
+                    $scope.loading = false;
                     $scope.$apply();
 
                     if (status == 401) {
