@@ -19,6 +19,11 @@ angular.module('myApp.controllers', [])
     }])
     .controller('LoginCtrl', ['$scope', '$http', function ($scope, $http) {
 
+        if (window.localStorage.getItem("access_token")) {
+            window.location = "#/scan";
+            return false;
+        }
+
         $scope.doLogin = function() {
             $scope.error = {};
             $scope.loading = true;
@@ -90,7 +95,6 @@ angular.module('myApp.controllers', [])
                 }
             }
 
-            $scope.loading = false;
             $scope.$apply();
         }
 
@@ -101,8 +105,7 @@ angular.module('myApp.controllers', [])
         }
 
         var redeemCode = function(code) {
-            // $scope.code = code;
-            // 
+
             var options = {
                 headers: {
                     'Access-Token' : window.localStorage.getItem("access_token")
