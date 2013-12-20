@@ -7,7 +7,8 @@ angular.module('myApp', [
     'myApp.controllers',
     'myApp.directives',
     'fsCordova',
-    'myApp.scannerService'
+    'myApp.scannerService',
+    'myApp.notifyService'
 ]).
 config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: 'LoginCtrl'});

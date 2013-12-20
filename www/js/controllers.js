@@ -49,7 +49,7 @@ angular.module('myApp.controllers', [])
                  });
         }
     }])
-    .controller('ScanCtrl', ['$scope', 'Scanner', '$http', function ($scope, Scanner, $http) {
+    .controller('ScanCtrl', ['$scope', 'Scanner', 'Notify', '$http', function ($scope, Scanner, Notify, $http) {
 
         if (!window.localStorage.getItem("access_token")) {
             window.location = "#/login";
@@ -57,18 +57,6 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.user  = { username: window.localStorage.getItem("username") };
-
-        // $scope.claim = {
-        //     code: '12345667778999',
-        //     customer: {
-        //         name: 'Kewan',
-        //         picture: 'http://www.placehold.it/50x50'
-        //     },
-        //     offer: {
-        //         title: '2 for 1 on main meals',
-        //         image: 'http://www.placehold.it/90x50'
-        //     }
-        // };
 
         $scope.scan = function() {
            $scope.error = {};
@@ -96,6 +84,7 @@ angular.module('myApp.controllers', [])
             }
 
             if ($scope.error.message) {
+                Notify.vibrate();
                 $scope.loading = false;
             }
 
@@ -105,6 +94,7 @@ angular.module('myApp.controllers', [])
         var onFail = function (error) { 
             $scope.error.message = "Scanning failed: " + error;
             $scope.loading = false;
+            Notify.vibrate();
             $scope.$apply();
         }
 
@@ -121,11 +111,13 @@ angular.module('myApp.controllers', [])
                  .success(function(data, status, headers, config) {
                     $scope.claim = data.claim;
                     $scope.loading = false;
+                    Notify.beep();
                     $scope.$apply();
                  })
                  .error(function(data, status, headers, config) {
                     $scope.error.message = data.error;
                     $scope.loading = false;
+                    Notify.vibrate();
                     $scope.$apply();
 
                     if (status == 401) {
