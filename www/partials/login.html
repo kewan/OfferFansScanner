@@ -6,7 +6,6 @@
 
 
 <div class='details' style="text-align: center; margin-top: 60px;">
-    <form ng-submit="doLogin()">
     <p id="error" ng-show="error.message">{{error.message}}</p>
     <div>
         <input type="text" class="topcoat-text-input" ng-model="user.username" placeholder="username" value="">
@@ -17,8 +16,7 @@
     </div>
 
     <div style="margin-top: 10px">
-        <input type="submit" class="topcoat-button" value="Login" />
+        <button class="topcoat-button" disabler="'Checking...'" ng-model="loading" ng-click="doLogin()">Login</button>
     </div>
-    </form>
 </div>
          

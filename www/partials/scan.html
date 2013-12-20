@@ -11,7 +11,7 @@
 
 
 <div class='details' style="text-align: center; margin-top: 30px;">
-    <button class="topcoat-button--large--cta" ng-click="scan()">Scan Offer Code</button>
+    <button class="topcoat-button--large--cta" disabler="'Scanning...'" ng-model="loading" ng-click="scan()">Scan Offer Code</button>
     <p id="error" ng-show="error.message">{{error.message}}</p>
     
 

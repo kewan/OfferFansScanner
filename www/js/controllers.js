@@ -21,9 +21,11 @@ angular.module('myApp.controllers', [])
 
         $scope.doLogin = function() {
             $scope.error = {};
+            $scope.loading = true;
 
             if ( $scope.user === undefined || !$scope.user.username || !$scope.user.password) {
                 $scope.error.message = 'Invalid login details';
+                $scope.loading = false;
                 return;
             }
 
@@ -37,6 +39,7 @@ angular.module('myApp.controllers', [])
                  .error(function(data, status, headers, config) {
                     $scope.error.message = data.error;
                     window.localStorage.clear();
+                    $scope.loading = false;
                     return;
                  });
         }
@@ -65,6 +68,7 @@ angular.module('myApp.controllers', [])
         $scope.scan = function() {
            $scope.error = {};
            $scope.claim = {};
+           $scope.loading = true;
            Scanner.scan(onSuccess, onFail);
         }
 
@@ -86,11 +90,13 @@ angular.module('myApp.controllers', [])
                 }
             }
 
+            $scope.loading = false;
             $scope.$apply();
         }
 
         var onFail = function (error) { 
             $scope.error.message = "Scanning failed: " + error;
+            $scope.loading = false;
             $scope.$apply();
         }
 

@@ -5,6 +5,7 @@ angular.module('myApp', [
     'ngRoute',
     'ngAnimate',
     'myApp.controllers',
+    'myApp.directives',
     'fsCordova',
     'myApp.scannerService'
 ]).
