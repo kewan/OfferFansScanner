@@ -265,6 +265,13 @@ ul {
     max-height: 50px;
 }
 
+#error {
+    color: #e44c55;
+}
+
 .info {
-    margin: 30px; color: #656565; background: #f3f5c7; padding: 10px;
+    margin: 30px; color: #656565; background: #f3f5c7; padding: 5px 20px 5px 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }

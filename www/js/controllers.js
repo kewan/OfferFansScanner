@@ -30,6 +30,7 @@ angular.module('myApp.controllers', [])
 
             if ( $scope.user === undefined || !$scope.user.username || !$scope.user.password) {
                 $scope.error.message = 'Invalid login details';
+                Notify.vibrate();
                 $scope.loading = false;
                 return;
             }
@@ -43,6 +44,7 @@ angular.module('myApp.controllers', [])
                  })
                  .error(function(data, status, headers, config) {
                     $scope.error.message = data.error;
+                    Notify.vibrate();
                     window.localStorage.clear();
                     $scope.loading = false;
                     return;
