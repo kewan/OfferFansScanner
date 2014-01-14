@@ -264,3 +264,7 @@ ul {
     height: 50px;
     max-height: 50px;
 }
+
+.info {
+    margin: 30px; color: #656565; background: #f3f5c7; padding: 10px;
+}
