@@ -17,7 +17,7 @@ angular.module('myApp.controllers', [])
             return false;
         }
     }])
-    .controller('LoginCtrl', ['$scope', '$http', function ($scope, $http) {
+    .controller('LoginCtrl', ['$scope', '$http', 'Notify', function ($scope, $http, Notify) {
 
         if (window.localStorage.getItem("access_token")) {
             window.location = "#/scan";
