@@ -13,7 +13,11 @@ angular.module('myApp.apiService', [])
               production:  { url: "https://www.offerfans.com", version: 'v1' }
             },
 
-            build_url: function(path) {
+            currentEnv: function()  {
+              return this.env;
+            },
+
+            buildUrl: function(path) {
 
               if (!this.options[ this.env ]) {
                 this.env = 'production';
@@ -26,7 +30,7 @@ angular.module('myApp.apiService', [])
             },
 
             login: function(user, onSuccess, onFailure) {
-              $http.post(this.build_url("/auth/login"), user)
+              $http.post(this.buildUrl("/auth/login"), user)
                    .success(onSuccess)
                    .error(onFailure);
             },
@@ -39,7 +43,7 @@ angular.module('myApp.apiService', [])
               }
 
               // put access_token in header
-              $http.put(this.build_url("/redeem/"+code), {}, options)
+              $http.put(this.buildUrl("/redeem/"+code), {}, options)
                    .success(onSuccess)
                    .error(onFailure);
             }

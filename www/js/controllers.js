@@ -24,6 +24,10 @@ angular.module('myApp.controllers', [])
             return false;
         }
 
+        $scope.showInfo = function() {
+            alert(Api.currentEnv());
+        }
+
         $scope.doLogin = function() {
             $scope.error = {};
             $scope.loading = true;
