@@ -24,18 +24,6 @@ angular.module('myApp.controllers', [])
             return false;
         }
 
-        $scope.showInfo = function() {
-            clearTimeout($scope.downTimer);
-            $scope.downTimer = setTimeout(function() {
-                // alert('mousedown > 2 sec');   
-                alert(Api.currentEnv());
-            }, 5000);
-        }
-
-        $scope.hideInfo = function() {
-            clearTimeout($scope.downTimer);
-        }
-
         $scope.doLogin = function() {
             $scope.error = {};
             $scope.loading = true;
@@ -46,6 +34,15 @@ angular.module('myApp.controllers', [])
                 $scope.loading = false;
                 return;
             }
+
+            if($scope.user.username == 'debug' && $scope.user.password == 'showme') {
+                alert(Api.env);
+                Notify.vibrate();
+                $scope.user = {};
+                $scope.loading = false;
+                return ;
+            }
+
             Api.login($scope.user, loginSuccess, loginError);
         }
 
