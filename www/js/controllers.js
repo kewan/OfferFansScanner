@@ -25,7 +25,15 @@ angular.module('myApp.controllers', [])
         }
 
         $scope.showInfo = function() {
-            alert(Api.currentEnv());
+            clearTimeout($scope.downTimer);
+            $scope.downTimer = setTimeout(function() {
+                // alert('mousedown > 2 sec');   
+                alert(Api.currentEnv());
+            }, 5000);
+        }
+
+        $scope.hideInfo = function() {
+            clearTimeout($scope.downTimer);
         }
 
         $scope.doLogin = function() {
