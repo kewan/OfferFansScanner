@@ -17,7 +17,7 @@ angular.module('myApp.controllers', [])
             return false;
         }
     }])
-    .controller('LoginCtrl', ['$scope', '$http', 'Notify', function ($scope, $http, Notify) {
+    .controller('LoginCtrl', ['$scope', 'Api', 'Notify', function ($scope, Api, Notify) {
 
         if (window.localStorage.getItem("access_token")) {
             window.location = "#/scan";
@@ -34,24 +34,23 @@ angular.module('myApp.controllers', [])
                 $scope.loading = false;
                 return;
             }
-
-            $http.post("http://offerfans.ngrok.com/api/v1/auth/login", $scope.user)
-                 .success(function(data, status, headers, config) {
-                    window.localStorage.setItem("access_token", data.token);
-                    window.localStorage.setItem("username", $scope.user.username);
-                    window.location = "#/scan";
-                    return true;
-                 })
-                 .error(function(data, status, headers, config) {
-                    $scope.error.message = data.error;
-                    Notify.vibrate();
-                    window.localStorage.clear();
-                    $scope.loading = false;
-                    return;
-                 });
+            Api.login($scope.user, loginSuccess, loginError);
         }
+
+        var loginSuccess = function(data, status, headers, config) {
+            window.localStorage.setItem("access_token", data.token);
+            window.localStorage.setItem("username", $scope.user.username);
+            window.location = "#/scan";
+         };
+
+        var loginError = function(data, status, headers, config) {
+            $scope.error.message = data.error;
+            Notify.vibrate();
+            window.localStorage.clear();
+            $scope.loading = false;
+         };
     }])
-    .controller('ScanCtrl', ['$scope', 'Scanner', 'Notify', '$http', function ($scope, Scanner, Notify, $http) {
+    .controller('ScanCtrl', ['$scope', 'Scanner', 'Notify', 'Api', function ($scope, Scanner, Notify, Api) {
 
         if (!window.localStorage.getItem("access_token")) {
             window.location = "#/login";
@@ -64,10 +63,10 @@ angular.module('myApp.controllers', [])
            $scope.error = {};
            $scope.claim = {};
            $scope.loading = true;
-           Scanner.scan(onSuccess, onFail);
+           Scanner.scan(scanSuccess, scanFailure);
         }
 
-        var onSuccess = function (result) {
+        var scanSuccess = function (result) {
            console.log("Scanner result: \n" +
                 "text: " + result.text + "\n" +
                 "format: " + result.format + "\n" +
@@ -79,7 +78,7 @@ angular.module('myApp.controllers', [])
                 $scope.error.message = "Unknown barcode format";
             } else {
                 if (result.text) {
-                    redeemCode(result.text);
+                    Api.redeem(result.text, redeemSuccess, redeemFailure);
                 } else {
                     $scope.error.message = "Can not read barcode";
                 }
@@ -93,44 +92,30 @@ angular.module('myApp.controllers', [])
             $scope.$apply();
         }
 
-        var onFail = function (error) { 
+        var scanFailure = function (error) { 
             $scope.error.message = "Scanning failed: " + error;
             $scope.loading = false;
             Notify.vibrate();
             $scope.$apply();
         }
 
-        var redeemCode = function(code) {
+        var redeemSuccess = function(data, status, headers, config) {
+            $scope.claim = data.claim;
+            $scope.loading = false;
+            Notify.beep();
+            $scope.$apply();
+         }
 
-            var options = {
-                headers: {
-                    'Access-Token' : window.localStorage.getItem("access_token")
-                }
-            }
-
-            // put access_token in header
-            $http.put("http://offerfans.ngrok.com/api/v1/redeem/"+code, {}, options)
-                 .success(function(data, status, headers, config) {
-                    $scope.claim = data.claim;
-                    $scope.loading = false;
-                    Notify.beep();
-                    $scope.$apply();
-                 })
-                 .error(function(data, status, headers, config) {
-                    $scope.error.message = data.error;
-                    $scope.loading = false;
-                    Notify.vibrate();
-                    $scope.$apply();
-
-                    if (status == 401) {
-                        //unauthorised invalid token
-                        alert(data.error);
-                        window.localStorage.clear();
-                        window.location = "#/login";
-                        return false;
-                    }
-
-                 });
-
-        }
+         var redeemFailure = function(data, status, headers, config) {
+             $scope.error.message = data.error;
+             $scope.loading = false;
+             Notify.vibrate();
+             $scope.$apply();
+             if (status == 401) {
+                 //unauthorised invalid token
+                 alert(data.error);
+                 window.localStorage.clear();
+                 window.location = "#/login";
+             }
+          }
     }]);

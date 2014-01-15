@@ -7,6 +7,7 @@ angular.module('myApp', [
     'myApp.controllers',
     'myApp.directives',
     'fsCordova',
+    'myApp.apiService',
     'myApp.scannerService',
     'myApp.notifyService'
 ]).
