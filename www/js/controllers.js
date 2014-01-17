@@ -2,6 +2,7 @@
 
 angular.module('myApp.controllers', [])
     .controller('MainCtrl', ['$scope', '$rootScope', '$window', '$location', function ($scope, $rootScope, $window, $location) {
+        $scope.timeoutMessage = "Unable to connect. Make sure you are online and please try again later."
         $scope.slide = '';
         $rootScope.back = function() {
           $scope.slide = 'slide-right';
@@ -47,13 +48,15 @@ angular.module('myApp.controllers', [])
         }
 
         var loginSuccess = function(data, status, headers, config) {
+            console.log("Success ", data);
             window.localStorage.setItem("access_token", data.token);
             window.localStorage.setItem("username", $scope.user.username);
             window.location = "#/scan";
          };
 
         var loginError = function(data, status, headers, config) {
-            $scope.error.message = data.error;
+            console.log("Error", data, status, headers, config);
+            $scope.error.message = (data) ? data.error : $scope.timeoutMessage;
             Notify.vibrate();
             window.localStorage.clear();
             $scope.loading = false;
@@ -116,7 +119,8 @@ angular.module('myApp.controllers', [])
          }
 
          var redeemFailure = function(data, status, headers, config) {
-             $scope.error.message = data.error;
+             console.log("Error", data, status, headers, config);
+             $scope.error.message = (data) ? data.error : $scope.timeoutMessage;
              $scope.loading = false;
              Notify.vibrate();
              $scope.$apply();

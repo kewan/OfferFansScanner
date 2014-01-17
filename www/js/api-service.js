@@ -30,7 +30,7 @@ angular.module('myApp.apiService', [])
             },
 
             login: function(user, onSuccess, onFailure) {
-              $http.post(this.buildUrl("/auth/login"), user)
+              $http.post(this.buildUrl("/auth/login"), user, {timeout: 3000})
                    .success(onSuccess)
                    .error(onFailure);
             },
@@ -39,7 +39,8 @@ angular.module('myApp.apiService', [])
               var options = {
                   headers: {
                       'Access-Token' : window.localStorage.getItem("access_token")
-                  }
+                  },
+                  timeout: 3000
               }
 
               // put access_token in header
