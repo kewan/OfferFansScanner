@@ -3,15 +3,7 @@
 angular.module('myApp.controllers', [])
     .controller('MainCtrl', ['$scope', '$rootScope', '$window', '$location', function ($scope, $rootScope, $window, $location) {
         $scope.timeoutMessage = "Unable to connect. Make sure you are online and please try again later."
-        $scope.slide = '';
-        $rootScope.back = function() {
-          $scope.slide = 'slide-right';
-          $window.history.back();
-        }
-        $rootScope.go = function(path){
-          $scope.slide = 'slide-left';
-          $location.url(path);
-        }
+
         $rootScope.logout = function() {
             window.localStorage.clear();
             window.location = "#/login";
