@@ -5,7 +5,7 @@ angular.module('myApp.apiService', [])
         function ($http) {
           return {
 
-            env: 'production',
+            env: 'development',
 
             options: {
               development: { url: "http://offerfans.ngrok.com", version: 'v1' },
