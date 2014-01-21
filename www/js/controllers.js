@@ -36,7 +36,13 @@ angular.module('myApp.controllers', [])
                 return ;
             }
 
-            Api.login($scope.user, loginSuccess, loginError);
+            try {
+               Api.login($scope.user, loginSuccess, loginError);
+            }
+            catch (e) {
+               console.log(e)
+            }
+            
         }
 
         var loginSuccess = function(data, status, headers, config) {
