@@ -13,7 +13,7 @@ angular.module('myApp.apiService', [])
               production:  { url: "https://www.offerfans.com", version: 'v1' }
             },
 
-            currentEnv: function()  {
+            currentEnv: function() {
               return this.env;
             },
 
